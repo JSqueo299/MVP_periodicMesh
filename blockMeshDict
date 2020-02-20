@@ -1,0 +1,255 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2.3.0                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      blockMeshDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+convertToMeters 0.001;           // multiplies all values by 0.001 to turn units in mm to m
+
+vertices                         // all units are in mm below (converToMeters converts them to meters)
+(
+    (0 0 0)   	        //0
+    (119 0 0)           //1
+    (119 127 0)         //2
+    (0 127 0)           //3
+    (0 0 76.2)          //4
+    (119 0 76.2)        //5
+    (119 127 76.2)      //6
+    (0 127 76.2)        //7
+    (152 0 0)           //8
+    (152 127 0)         //9
+    (152 0 76.2)        //10
+    (152 127 76.2)      //11
+    (0 63.5 0)          //12 (new point, between 0 and 3) 
+    (829 82.55 0)       //13
+    (829 44.45 0)       //14
+    (829 82.55 76.2)    //15
+    (829 44.45 76.2)    //16
+    (119 63.5 0)        //17
+    (152 82.55 0)       //18
+    (152 44.45 0)       //19
+    (152 82.55 76.2)    //20
+    (152 44.45 76.2)    //21
+    (119 63.5 76.2)     //22
+    (0 63.5 76.2)       //23  (new point, between 4 and 7)
+    (119 127 38.1)      //24  (old point, not used)
+    (152 127 57.16)     //25  (old point, not used)
+    (119 0 38.1)        //26  (old point, not used)
+    (152 0 19.06)       //27  (old point, not used)
+    (152 0 57.16)       //28  (old point, not used)
+    (12 127 55)         //29  (old point, not used)
+    (2 127 55)          //30  (old point, not used)
+    (3 0 55  )          //31  (old point, not used)
+    (1 0 55)            //32  (old point, not used)
+    (829 0 0)           //33
+    (829 127 0)         //34
+    (152 -8332.9 0)     //35
+    (829 -8332.9 0)     //36
+    (829 -42.9 0)       //37
+    (152 -42.9 0)       //38
+    (3316 -8332.9 0)    //39
+    (3316 -42.9 0)      //40
+    (3316 0 0)          //41
+    (3316 127 0)        //42
+    (3316 169.9 0)      //43
+    (829 169.9 0)       //44
+    (3316 8459.9 0)     //45
+    (829 8459.9 0)      //46
+    (152 8459.9 0)      //47
+    (152 169.9 0)       //48
+    (829 0 76.2)        //49
+    (829 127 76.2)      //50
+    (152 -8332.9 76.2)  //51
+    (829 -8332.9 76.2)  //52
+    (829 -42.9 76.2)    //53
+    (152 -42.9 76.2)    //54
+    (3316 -8332.9 76.2) //55
+    (3316 -42.9 76.2)   //56
+    (3316 0 76.2)       //57
+    (829 169.9 76.2)    //58
+    (3316 127 76.2)     //59
+    (3316 169.9 76.2)   //60
+    (3316 8459.9 76.2)  //61
+    (829 8459.9 76.2)   //62
+    (152 169.9 76.2)    //63
+    (152 8459.9 76.2)   //64
+    (3316 82.55 76.2)   //65
+    (3316 44.45 76.2)   //66
+    (3316 82.55 0)      //67
+    (3316 44.45 0)      //68
+);
+
+blocks                           
+(
+     //4mm ~ 1cell for channel (finer)
+
+    hex (12 17 2 3 23 22 6 7) (30 16 10) simpleGrading (1 1 1)              //1.1 (inlet, top)
+    hex (0 1 17 12 4 5 22 23) (30 16 10) simpleGrading (1 1 1)              //1.2 (inlet, bottom)
+    hex (1 8 19 17 5 10 21 22) (10 16 10) simpleGrading (1 1 1)             //2 (bottom of flame holder)
+    hex (17 18 9 2 22 20 11 6)    (10 16 10) simpleGrading (1 1 1)          //3 (top of flame holder)
+    hex (8 33 14 19 10 49 16 21)    (170 16 10) simpleGrading (1 1 1)       //4
+    hex (19 14 13 18 21 16 15 20)    (170 12 10) simpleGrading (1 1 1)      //5
+    hex (18 13 34 9 20 15 50 11)    (170 16 10) simpleGrading (1 1 1)       //6
+ 
+   //10mm ~ 1 cell for exhaust
+
+    hex (35 36 37 38 51 52 53 54)  (70 550 10) simpleGrading (1 1.05 1)        //7 
+    hex (36 39 40 37 52 55 56 53)  (250 550 10) simpleGrading (1.05 1.05 1)    //8 
+    hex (37 40 41 33 53 56 57 49)  (250 12 10) simpleGrading (1.05 1 1)     //9 
+    hex (33 41 68 14 49 57 66 16)  (250 16 10) simpleGrading (1.05 1 1)     //10.1
+    hex (14 68 67 13 16 66 65 15)  (250 12 10) simpleGrading (1.05 1 1)     //10.2
+    hex (13 67 42 34 15 65 59 50)  (250 16 10) simpleGrading (1.05 1 1)     //10.3
+    hex (34 42 43 44 50 59 60 58)  (250 12 10) simpleGrading (1.05 1 1)     //11 
+    hex (44 43 45 46 58 60 61 62)  (250 550 10) simpleGrading (1.05 1.05 1)    //12 
+    hex (48 44 46 47 63 58 62 64)  (70 550 10) simpleGrading (1 1.05 1)        //13 
+);
+
+
+edges                 // no curves or arcs, all straight lines
+(
+);
+
+
+boundary            // define boundary faces using four vertices in CCW direction if looking at face from outside block or CW direcection if looking inside
+(
+    combustorInlet
+    {
+        type patch;      // "patch" is used for inlet/outlet faces
+        faces
+        (   
+           (12 23 7 3) //(inlet, top)
+           (0 4 23 12) //(inlet, bottom)
+        );
+    }
+
+    domainInlet
+    {
+	type patch;
+	faces
+	(
+            (48 63 64 47)    //block 13 left side
+            (35 51 54 38)    //block 7 left side
+        );
+    }
+
+    exhaust
+    {
+        type patch;
+        faces
+        (
+            (55 39 40 56)    //block 8 right side
+            (56 40 41 57)    //block 9 right side
+            (65 67 42 59)    //block 10.3 right side
+            (66 68 67 65)    //block 10.2 right side
+            (57 41 68 66)    // block 10.1 right side
+            (59 42 43 60)    //block 11 right side
+            (60 43 45 61)    //block 12 right side
+            (47 64 62 46)    //block 13 top
+            (46 62 61 45)    //block 12 top
+            (52 51 35 36)    //block 7 bottom
+            (55 52 36 39)    //block 8 bottom
+        );
+    }
+
+    fixedWalls
+    {
+        type wall;      // "wall" is used for solid wall faces
+        faces
+        (   
+            (3 7 6 2)       //block 1.1 top
+            (2 6 11 9)      //block 3 top
+            (9 11 50 34)    //block 6 top
+            (0 1 5 4)       //block 1.2 bottom
+            (1 8 10 5)      //block 2 bottom
+            (8 33 49 10)    //block 4 bottom
+	    (19 21 20 18)   //block 5 left side (right side of flameholder)
+            (38 54 53 37)    //block 7 top (overhang)
+            (63 48 44 58)    //block 13 bottom (overhang)
+            (37 53 49 33)    //block 9 left side
+            (34 50 58 44)    //block 11 left side
+       ); 
+    }
+    
+    flameHolderTopAndBottom
+    {
+        type wall;
+        faces
+        (
+            (22 21 19 17)   //block 2 top (bottom of flameholder)
+            (17 18 20 22)   //block 3 bottom (top of flameholder)
+        );
+    } 
+    
+    back
+    {
+        type cyclic;      // "cyclic" is used for periodic faces in which two faces are treated as if physically connected
+        neighbourPatch front;
+        faces
+        (  
+            // back side (z = 0mm) 
+           // (0 3 2 1)      //block 1
+            (12 3 2 17)    //block 1.1
+            (0 12 17 1)    //block 1.2
+            (17 2 9 18)    //block 3
+            (1 17 19 8)    //block 2 
+            (18 9 34 13)   //block 6 
+            (19 18 13 14)  //block 5 
+            (8 19 14 33)   //block 4 
+            (35 38 37 36)  //block 7 
+            (36 37 40 39)  //block 8 
+            (37 33 41 40)  //block 9 
+            (34 44 43 42)  //block 11
+            (44 46 45 43)  //block 12
+            (48 47 46 44)  //block 13
+            (33 14 68 41)  //block 10.1
+            (14 13 67 68)  //block 10.2
+            (13 34 42 67)  //block 10.3
+//            (17 18 19 17)  //flameHolder deep side
+       );
+   }
+
+   front
+   {
+	type cyclic;
+	neighbourPatch back;
+	faces
+	(
+            // front side (z = 76.2mm)
+           // (4 5 6 7)       //block 1 
+            (23 22 6 7)     //block 1.1
+            (4 5 22 23)     //block 1.2
+            (22 20 11 6)    //block 3
+            (5 10 21 22)    //block 2
+            (20 15 50 11)   //block 6             
+            (21 16 15 20)   //block 5 
+            (10 49 16 21)   //block 4
+            (51 52 53 54)   //block 7
+            (52 55 56 53)   //block 8 
+            (53 56 57 49)   //block 9
+            (50 59 60 58)   //block 11
+            (58 60 61 62)   //block 12
+            (63 58 62 64)   //block 13
+            (49 57 66 16)   //block 10.1
+            (16 66 65 15)   //block 10.2
+            (15 65 59 50)   //block 10.3
+//            (22 21 20 22)   //flameHolder close side
+
+       );
+    }
+);
+
+mergePatchPairs             //vertices of connected faces line up, so faces automatically connected. Used when vertices do not line up exact
+(
+);
+
+// ************************************************************************* //
